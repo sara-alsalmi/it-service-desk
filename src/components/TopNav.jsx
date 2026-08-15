@@ -1,6 +1,10 @@
 ﻿import { useEffect, useRef, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { getAlerts, markAlertAsRead } from '../services/supabaseService';
+import {
+  getAlerts,
+  markAlertAsRead,
+  supabase,
+} from '../services/supabaseService';
 import styles from './TopNav.module.css';
 
 function timeAgo(iso) {
@@ -36,6 +40,36 @@ export default function TopNav({ search, onSearchChange }) {
     }
 
     loadAlerts();
+  }, []);
+
+  useEffect(() => {
+    const channel = supabase
+      .channel('alerts-realtime')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'alerts',
+        },
+        (payload) => {
+          const newAlert = {
+            id: payload.new.alert_id,
+            ticketId: payload.new.ticket_id,
+            type: payload.new.alert_type,
+            message: payload.new.message,
+            isRead: payload.new.is_read,
+            createdAt: payload.new.created_at,
+          };
+
+          setAlerts((prev) => [newAlert, ...prev]);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   useEffect(() => {
@@ -203,7 +237,6 @@ export default function TopNav({ search, onSearchChange }) {
                           {alert.ticketId} · {timeAgo(alert.createdAt)}
                         </span>
                       </span>
-
                     </button>
                   ))
                 )}
