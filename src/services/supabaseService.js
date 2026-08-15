@@ -79,3 +79,36 @@ export async function deleteTicket(id) {
 
   return { success: true };
 }
+
+export async function getAlerts() {
+  const { data, error } = await supabase
+    .from('alerts')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    throw error;
+  }
+
+  return data.map((alert) => ({
+    id: alert.alert_id,
+    ticketId: alert.ticket_id,
+    type: alert.alert_type,
+    message: alert.message,
+    isRead: alert.is_read,
+    createdAt: alert.created_at,
+  }));
+}
+
+export async function markAlertAsRead(id) {
+  const { error } = await supabase
+    .from('alerts')
+    .update({ is_read: true })
+    .eq('alert_id', id);
+
+  if (error) {
+    throw error;
+  }
+
+  return { success: true };
+}

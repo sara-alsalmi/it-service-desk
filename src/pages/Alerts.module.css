@@ -1,0 +1,275 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f5f6f7;
+  overflow-x: hidden;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 24px 48px;
+  max-width: 1340px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.titleRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.pageTitle {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1c21;
+}
+
+.count {
+  font-size: 16px;
+  font-weight: 400;
+  color: #8a8f9c;
+}
+
+.pageSubtitle {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.unreadSummary {
+  font-size: 11px;
+  font-weight: 700;
+  color: #2f999b;
+  background: #edf9f9;
+  border: 1px solid #cfeded;
+  border-radius: 12px;
+  padding: 4px 9px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.segmentGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.segmentButton {
+  border: 1px solid #dde2e7;
+  background: #ffffff;
+  color: #6b7280;
+  border-radius: 5px;
+  padding: 7px 11px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.segmentButton:hover {
+  border-color: #9fd5d6;
+  color: #2f8f91;
+  background: #fbfefe;
+}
+
+.segmentButtonActive {
+  border-color: #3abec0;
+  color: #2f8f91;
+  background: #eefafa;
+}
+
+.sortGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sortLabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #9ca3af;
+}
+
+.tableCard {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e3e5ea;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table thead tr {
+  border-bottom: 1px solid #e3e5ea;
+}
+
+.table th {
+  padding: 11px 16px;
+  text-align: left;
+  white-space: nowrap;
+  background: #ffffff;
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.table td {
+  padding: 12px 16px;
+  vertical-align: middle;
+  color: #374151;
+}
+
+.row {
+  border-bottom: 1px solid #f0f1f3;
+  cursor: pointer;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.row:hover {
+  background: #f0fafa;
+}
+
+.rowUnread {
+  background: #fbfefe;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 10px;
+  padding: 3px 8px;
+  font-size: 10.5px;
+  font-weight: 700;
+  border: 1px solid;
+}
+
+.statusUnread {
+  color: #2f999b;
+  background: #edf9f9;
+  border-color: #cfeded;
+}
+
+.statusRead {
+  color: #7b818c;
+  background: #f5f6f7;
+  border-color: #e2e5e9;
+}
+
+.messageCell {
+  max-width: 420px;
+  font-weight: 500;
+  color: #2e343c !important;
+}
+
+.rowUnread .messageCell {
+  font-weight: 650;
+}
+
+.ticketId {
+  font-family: 'Courier New', monospace;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #3abec0 !important;
+  white-space: nowrap;
+}
+
+.typeBadge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  padding: 3px 7px;
+  color: #4f5660;
+  background: #f3f4f6;
+  border: 1px solid #e4e7eb;
+  font-size: 10.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.createdCell {
+  color: #9ca3af !important;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.actionCell {
+  width: 48px;
+  text-align: right;
+}
+
+.viewButton {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid #b2e8e9;
+  border-radius: 3px;
+  background: #ffffff;
+  color: #3abec0;
+  cursor: pointer;
+}
+
+.viewButton:hover {
+  color: #32aaac;
+  border-color: #3abec0;
+  background: #f0fafa;
+}
+
+.stateCell {
+  padding: 48px !important;
+  text-align: center;
+  color: #9ca3af !important;
+  font-size: 13.5px;
+}
+
+@media (max-width: 760px) {
+  .body {
+    padding: 16px 12px 36px;
+  }
+
+  .titleRow {
+    align-items: flex-start;
+  }
+
+  .toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .sortGroup {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .table {
+    min-width: 820px;
+  }
+}
