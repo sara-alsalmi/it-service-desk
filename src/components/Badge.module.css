@@ -1,0 +1,20 @@
+.badge {
+  display: inline-block;
+  padding: 2px 0;
+  font-size: 13px;
+  font-weight: 400;
+  white-space: nowrap;
+  color: #374151;
+}
+
+/* Priority — plain text, no background */
+.low    { color: #16a34a; }
+.medium { color: #d97706; }
+.high   { color: #ea580c; }
+.critical { color: #dc2626; font-weight: 600; }
+
+/* Status — plain text like reference */
+.open       { color: #2563eb; }
+.inprogress { color: #d97706; }
+.resolved   { color: #16a34a; }
+.closed     { color: #6b7280; }

@@ -1,0 +1,984 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f5f6f7;
+  overflow-x: hidden;
+}
+
+/* ─── Body: single column, title/toolbar then table+filter row ─── */
+.body {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 24px 48px;
+  max-width: 1340px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Table card and filter panel sit side-by-side starting at the same top */
+.tableRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.tableCard {
+  flex: 1;
+  min-width: 0;
+  background: #fff;
+  border: 1px solid #e3e5ea;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.pageTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1c21;
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.count {
+  font-size: 16px;
+  font-weight: 400;
+  color: #8a8f9c;
+  cursor: pointer;
+}
+
+/* ─── Toolbar ─── */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.createBtn {
+  background: #3abec0;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 22px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+}
+
+.createBtn:hover {
+  background: #32aaac;
+}
+
+.pager {
+  font-size: 12.5px;
+  color: #8a8f9c;
+}
+
+/* ─── Table Card ─── */
+.tableCard {
+  background: #fff;
+  border: 1px solid #e3e5ea;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+/* ─── Title ─── */
+.titleRow {
+  margin-bottom: 14px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table thead tr {
+  border-bottom: 1px solid #e3e5ea;
+}
+
+.table th {
+  text-align: left;
+  padding: 11px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  white-space: nowrap;
+  background: #fff;
+  user-select: none;
+}
+
+.thCheck {
+  width: 44px;
+  padding-left: 16px !important;
+  padding-right: 0 !important;
+}
+
+.row {
+  border-bottom: 1px solid #f0f1f3;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.row:hover {
+  background: #f0fafa;
+}
+
+.rowSel {
+  background: #f0fafa !important;
+}
+
+.table td {
+  padding: 11px 16px;
+  color: #374151;
+  vertical-align: middle;
+}
+
+.tdCheck {
+  width: 44px;
+  padding-left: 16px !important;
+  padding-right: 0 !important;
+  cursor: pointer;
+}
+
+.tdNum {
+  font-size: 12.5px;
+  color: #8a8f9c !important;
+  cursor: pointer;
+  width: 80px;
+}
+
+.tdTitle {
+  font-weight: 600;
+  color: #1a1c21 !important;
+  cursor: pointer;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.priorityCell {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: #374151;
+  cursor: pointer;
+}
+
+.tdAssignee {
+  font-size: 12.5px;
+  color: #6b7280 !important;
+  cursor: pointer;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tdDate {
+  font-size: 12.5px;
+  color: #9ca3af !important;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.tdActions {
+  text-align: right;
+  padding-right: 16px !important;
+  width: 80px;
+}
+
+/* Row actions appear on hover */
+.rowActions {
+  display: inline-flex;
+  gap: 4px;
+  opacity: 0;
+}
+
+.row:hover .rowActions {
+  opacity: 1;
+}
+
+.iconAction {
+  background: none;
+  border: 1px solid #e3e5ea;
+  border-radius: 3px;
+  color: #9ca3af;
+  cursor: pointer;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.iconAction:hover {
+  background: #f0f1f3;
+  color: #374151;
+  border-color: #d1d5db;
+}
+
+.stateCell {
+  padding: 48px !important;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 13.5px;
+}
+
+/* ─── Checkbox ─── */
+.checkbox {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  accent-color: #3abec0;
+}
+
+/* ─── Filter Panel ─── */
+.filterPanel {
+  width: 210px;
+  flex-shrink: 0;
+  background: #fff;
+  border: 1px solid #e3e5ea;
+  border-radius: 4px;
+}
+
+.filterHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 16px 12px;
+  border-bottom: 1px solid #f0f1f3;
+}
+
+.filterTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1c21;
+}
+
+.filterReset {
+  font-size: 11.5px;
+  color: #9ca3af;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.filterReset:hover {
+  color: #3abec0;
+}
+
+.filterSection {
+  padding: 12px 16px 14px;
+  border-bottom: 1px solid #f0f1f3;
+}
+
+.filterSection:last-child {
+  border-bottom: none;
+}
+
+.filterLabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #9ca3af;
+  margin: 0 0 10px;
+}
+
+.sortSelect {
+  width: 100%;
+  font-size: 13px;
+  color: #374151;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 7px 10px;
+  outline: none;
+  cursor: pointer;
+}
+
+.sortSelect:focus {
+  border-color: #3abec0;
+  box-shadow: 0 0 0 2px rgba(58, 190, 192, 0.12);
+}
+
+.checkLabel {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  color: #374151;
+  cursor: pointer;
+  padding: 4px 0;
+  user-select: none;
+}
+
+.checkLabel:hover {
+  color: #1a1c21;
+}
+
+@media (max-width: 700px) {
+  .filterPanel { display: none; }
+  .body { padding: 12px; }
+}
+
+
+/* ─── Ticket page refinements ─── */
+.tdActions {
+  width: 92px;
+  min-width: 92px;
+  text-align: left;
+  padding-right: 16px !important;
+}
+
+.rowActions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.row:hover .rowActions,
+.row:focus-within .rowActions {
+  opacity: 1;
+}
+
+.iconAction {
+  background: #fff;
+  border: 1px solid #e3e5ea;
+  border-radius: 3px;
+  color: #8a8f9c;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.iconAction:hover {
+  background: #f0f1f3;
+  color: #374151;
+  border-color: #d1d5db;
+}
+
+.deleteIcon {
+  color: #b42318;
+}
+
+.deleteIcon:hover {
+  background: #fff5f4;
+  color: #912018;
+  border-color: #f3c7c3;
+}
+
+@media (max-width: 1000px) {
+  .body {
+    padding: 18px 16px 36px;
+  }
+
+  .tableRow {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .tableCard {
+    width: 100%;
+  }
+
+  .filterPanel {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr 1fr 1fr;
+    align-items: start;
+  }
+
+  .filterHeader,
+  .filterSection {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .body {
+    padding: 12px;
+  }
+
+  .toolbar {
+    gap: 12px;
+    align-items: center;
+  }
+
+  .createBtn {
+    padding: 8px 14px;
+  }
+
+  .filterPanel {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .filterHeader,
+  .filterSection {
+    border-bottom: 1px solid #f0f1f3;
+  }
+
+  .tableCard {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table {
+    min-width: 820px;
+  }
+
+  .rowActions {
+    opacity: 1;
+  }
+}
+
+
+/* ─── Compact row actions: no extra horizontal page width ─── */
+.tdActions {
+  width: 72px;
+  min-width: 72px;
+  max-width: 72px;
+  padding-left: 6px !important;
+  padding-right: 8px !important;
+  white-space: nowrap;
+}
+
+.rowActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.row:hover .rowActions,
+.row:focus-within .rowActions {
+  opacity: 1;
+}
+
+.iconAction {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  color: #3abec0;
+  border-color: #b2e8e9;
+  background: #fff;
+}
+
+.iconAction:hover {
+  color: #32aaac;
+  background: #f0fafa;
+  border-color: #3abec0;
+}
+
+/* Keep delete visually consistent with the system accent, as requested. */
+.deleteIcon,
+.deleteIcon:hover {
+  color: #3abec0;
+}
+
+@media (max-width: 700px) {
+  .tdActions {
+    width: 72px;
+    min-width: 72px;
+    max-width: 72px;
+  }
+
+  .rowActions {
+    opacity: 1;
+  }
+}
+
+
+/* Balanced action icon sizing */
+.iconAction {
+  width: 27px;
+  height: 27px;
+}
+
+.tdActions {
+  width: 66px;
+  min-width: 66px;
+  max-width: 66px;
+}
+
+
+/* Final action spacing */
+.tdActions {
+  width: 72px;
+  min-width: 72px;
+  max-width: 72px;
+  padding-left: 0 !important;
+  padding-right: 18px !important;
+  text-align: left;
+}
+
+.rowActions {
+  gap: 4px;
+  transform: translateX(-6px);
+}
+
+.iconAction {
+  width: 24px;
+  height: 24px;
+}
+
+
+/* ─── Refined dropdown filters ─── */
+.filterHeader > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.filterHint {
+  font-size: 10.5px;
+  color: #a0a5b1;
+  font-weight: 400;
+}
+
+.selectWrap {
+  position: relative;
+}
+
+.selectWrap::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid #8a8f9c;
+  border-bottom: 1.5px solid #8a8f9c;
+  transform: translateY(-65%) rotate(45deg);
+  pointer-events: none;
+}
+
+.filterSelect {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #30343b;
+  background: #ffffff;
+  border: 1px solid #dfe3e8;
+  border-radius: 5px;
+  padding: 8px 30px 8px 10px;
+  outline: none;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.filterSelect:hover {
+  border-color: #b9c4ca;
+  background: #fbfcfc;
+}
+
+.filterSelect:focus {
+  border-color: #3abec0;
+  box-shadow: 0 0 0 2px rgba(58, 190, 192, 0.12);
+  background: #ffffff;
+}
+
+.filterSelect option {
+  color: #30343b;
+  background: #ffffff;
+}
+
+.filterSection {
+  padding: 11px 14px 13px;
+}
+
+.filterLabel {
+  display: block;
+  margin: 0 0 7px;
+}
+
+@media (max-width: 1000px) {
+  .filterPanel {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(150px, 0.8fr) repeat(5, minmax(135px, 1fr));
+    align-items: end;
+    overflow-x: auto;
+  }
+
+  .filterHeader {
+    min-width: 150px;
+  }
+
+  .filterSection {
+    min-width: 135px;
+  }
+}
+
+@media (max-width: 700px) {
+  .filterPanel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .filterHeader {
+    grid-column: 1 / -1;
+  }
+
+  .filterSection {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .filterPanel {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ─── Final filter panel polish ─── */
+.tableRow {
+  align-items: stretch;
+}
+
+.filterPanel {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  overflow: visible;
+}
+
+.filterHeader {
+  flex: 0 0 auto;
+}
+
+.filterSection {
+  flex: 0 0 auto;
+}
+
+.filterSection:last-child {
+  border-bottom: none;
+}
+
+/* Native select opens according to available viewport space.
+   Keep enough room around the panel and avoid clipping by ancestors. */
+.selectWrap,
+.filterSection,
+.filterPanel,
+.tableRow {
+  overflow: visible;
+}
+
+.filterSelect {
+  height: 36px;
+  border: 1px solid #dde2e7;
+  border-radius: 6px;
+  padding: 0 34px 0 11px;
+  background: #fff;
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 36px;
+  color: #34383f;
+  box-shadow: 0 1px 1px rgba(20, 24, 32, 0.02);
+}
+
+.filterSelect:hover {
+  border-color: #b9c5ca;
+  background: #fcfdfd;
+}
+
+.filterSelect:focus {
+  border-color: #3abec0;
+  box-shadow: 0 0 0 3px rgba(58, 190, 192, 0.10);
+}
+
+.selectWrap::after {
+  right: 12px;
+  width: 5px;
+  height: 5px;
+  border-right-width: 1.5px;
+  border-bottom-width: 1.5px;
+  border-color: #737984;
+}
+
+/* Sort is an operation, not a filtering criterion. */
+.sortSection {
+  margin: 10px 10px 4px;
+  padding: 10px !important;
+  border: 1px solid #e2eeee !important;
+  border-radius: 6px;
+  background: #f7fbfb;
+}
+
+.sortHeading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 7px;
+}
+
+.sortIcon {
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  color: #329fa1;
+  background: #e9f7f7;
+}
+
+.sortLabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.45px;
+  color: #687078;
+}
+
+.sortDropdown {
+  border-color: #cfe4e4;
+  background: #fff;
+}
+
+.sortDropdown:hover {
+  border-color: #8fcfd0;
+}
+
+@media (max-width: 1000px) {
+  .filterPanel {
+    display: grid;
+    grid-template-columns: minmax(150px, 0.8fr) repeat(5, minmax(135px, 1fr));
+    align-self: auto;
+    min-height: auto;
+    overflow-x: auto;
+    overflow-y: visible;
+  }
+
+  .sortSection {
+    margin: 7px;
+  }
+}
+
+@media (max-width: 700px) {
+  .filterPanel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: visible;
+  }
+
+  .sortSection {
+    margin: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .filterPanel {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ─── Final compact filter layout ─── */
+
+/* Do not stretch the filter panel to match table height.
+   This keeps the last ticket row compact and natural. */
+.tableRow {
+  align-items: flex-start !important;
+}
+
+.filterPanel {
+  align-self: flex-start !important;
+  min-height: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  display: block !important;
+}
+
+/* Sort is a horizontal segmented choice, not a dropdown. */
+.sortSection {
+  margin: 0 !important;
+  padding: 12px 14px 13px !important;
+  border: 0 !important;
+  border-bottom: 1px solid #f0f1f3 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.sortChoices {
+  display: flex;
+  gap: 6px;
+  width: 100%;
+}
+
+.sortChoice {
+  flex: 1;
+  border: 1px solid #dde2e7;
+  background: #fff;
+  color: #6b7280;
+  border-radius: 5px;
+  padding: 7px 9px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.sortChoice:hover {
+  border-color: #9fd5d6;
+  color: #2f8f91;
+  background: #fbfefe;
+}
+
+.sortChoiceActive {
+  border-color: #3abec0;
+  color: #2f8f91;
+  background: #eefafa;
+  box-shadow: inset 0 0 0 1px rgba(58, 190, 192, 0.05);
+}
+
+/* Custom dropdowns — always rendered below their trigger. */
+.customFilter {
+  position: relative;
+}
+
+.customDropdown {
+  position: relative;
+}
+
+.dropdownTrigger {
+  width: 100%;
+  min-height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: #fff;
+  color: #34383f;
+  border: 1px solid #dde2e7;
+  border-radius: 6px;
+  padding: 8px 11px;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.dropdownTrigger:hover {
+  border-color: #b8c7cc;
+  background: #fcfefe;
+}
+
+.dropdownTriggerOpen,
+.dropdownTrigger:focus-visible {
+  outline: none;
+  border-color: #3abec0;
+  box-shadow: 0 0 0 3px rgba(58, 190, 192, 0.10);
+}
+
+.dropdownChevron {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-right: 1.5px solid #7a818b;
+  border-bottom: 1.5px solid #7a818b;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.15s ease;
+}
+
+.dropdownChevronOpen {
+  transform: rotate(225deg) translate(-1px, -1px);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: #fff;
+  border: 1px solid #dfe4e8;
+  border-radius: 7px;
+  box-shadow: 0 8px 24px rgba(31, 41, 55, 0.12);
+  padding: 4px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.dropdownOption {
+  width: 100%;
+  display: block;
+  border: 0;
+  background: transparent;
+  color: #454b55;
+  text-align: left;
+  border-radius: 5px;
+  padding: 8px 9px;
+  font-family: inherit;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.dropdownOption:hover {
+  background: #f3f9f9;
+  color: #257f81;
+}
+
+.dropdownOptionActive {
+  background: #edf9f9;
+  color: #258c8e;
+  font-weight: 600;
+}
+
+/* Keep the right panel compact on desktop; stack naturally on smaller screens. */
+@media (max-width: 1000px) {
+  .filterPanel {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0 !important;
+  }
+
+  .filterHeader {
+    grid-column: 1 / -1;
+  }
+
+  .sortSection {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .filterPanel {
+    grid-template-columns: 1fr !important;
+  }
+}

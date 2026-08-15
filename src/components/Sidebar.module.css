@@ -1,0 +1,145 @@
+.sidebar {
+  width: 220px;
+  min-height: 100vh;
+  background: #111318;
+  color: #c9cdd6;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  border-right: 1px solid #22262f;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 14px;
+  border-bottom: 1px solid #22262f;
+}
+
+.logoMark {
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  background: #1e40af;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.logoTextGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.logoText {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e2e5ec;
+  line-height: 1.2;
+}
+
+.logoOrg {
+  font-size: 11px;
+  color: #5a6070;
+}
+
+/* Nav */
+.nav {
+  padding: 12px 0;
+  flex: 1;
+}
+
+.navGroup {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #3a4050;
+  padding: 10px 14px 5px;
+  margin: 0;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 14px;
+  font-size: 13px;
+  color: #8a909e;
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  margin: 1px 0;
+}
+
+.navItem:hover {
+  background: #1a1e27;
+  color: #d0d5e0;
+}
+
+.navItem.active {
+  background: #16213a;
+  color: #5b9cf6;
+  border-left-color: #3b82f6;
+}
+
+.navIcon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.navItem.active .navIcon,
+.navItem:hover .navIcon {
+  opacity: 1;
+}
+
+/* Footer */
+.sidebarFooter {
+  border-top: 1px solid #22262f;
+  padding: 12px 14px;
+}
+
+.footerUser {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footerAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 3px;
+  background: #22262f;
+  color: #7a8090;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.footerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.footerName {
+  font-size: 12.5px;
+  color: #c9cdd6;
+  font-weight: 500;
+}
+
+.footerRole {
+  font-size: 11px;
+  color: #5a6070;
+}

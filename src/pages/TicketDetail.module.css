@@ -1,0 +1,319 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f5f6f7;
+  overflow-x: hidden;
+}
+
+.content {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 24px 48px;
+}
+
+/* ─── Breadcrumb ─── */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  margin-bottom: 14px;
+}
+
+.breadBtn {
+  background: none;
+  border: none;
+  color: #3abec0;
+  font-size: 12.5px;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+.breadBtn:hover { text-decoration: underline; }
+
+.sep { color: #d1d5db; }
+
+.breadCurrent { color: #374151; font-weight: 500; }
+
+/* ─── Title Banner ─── */
+.titleBanner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid #e3e5ea;
+  border-radius: 6px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+}
+
+.titleLeft { flex: 1; min-width: 0; }
+
+.ticketTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a1c21;
+  margin: 0 0 6px;
+  line-height: 1.3;
+}
+
+.titleMeta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.ticketIdBadge {
+  font-family: 'Courier New', monospace;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #3abec0;
+  background: #f0fafa;
+  border: 1px solid #b2e8e9;
+  border-radius: 3px;
+  padding: 1px 7px;
+}
+
+.metaDot { color: #d1d5db; }
+
+.metaText { font-size: 12.5px; color: #6b7280; }
+
+.titleRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.priorityLabel { font-size: 13px; color: #374151; font-weight: 500; }
+
+/* Status pill in title banner */
+.statusPill {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 12px;
+  border: 1px solid;
+}
+
+.statusPill[data-status="open"]        { background: #eff6ff; color: #2563eb; border-color: #bfdbfe; }
+.statusPill[data-status="in-progress"] { background: #fffbeb; color: #d97706; border-color: #fde68a; }
+.statusPill[data-status="resolved"]    { background: #f0fdf4; color: #16a34a; border-color: #bbf7d0; }
+.statusPill[data-status="closed"]      { background: #f3f4f6; color: #6b7280; border-color: #d1d5db; }
+
+/* ─── Layout ─── */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Description card grows to fill remaining height */
+.main > .card:first-child {
+  flex: 1;
+}
+
+.side { display: flex; flex-direction: column; gap: 14px; }
+
+/* ─── Card ─── */
+.card {
+  background: #fff;
+  border: 1px solid #e3e5ea;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.cardHeader {
+  padding: 11px 16px;
+  border-bottom: 1px solid #f0f1f3;
+  background: #fafbfc;
+}
+
+.cardTitle {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.cardBody { padding: 16px; }
+
+/* ─── Description ─── */
+.description {
+  font-size: 13.5px;
+  color: #374151;
+  line-height: 1.7;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* ─── Requester ─── */
+.requesterRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.requesterAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: #f0fafa;
+  color: #3abec0;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid #b2e8e9;
+  text-transform: uppercase;
+}
+
+.requesterInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.requesterName { font-size: 13.5px; font-weight: 600; color: #1a1c21; }
+
+.requesterEmail { font-size: 12px; color: #6b7280; }
+
+.deptTag {
+  font-size: 11.5px;
+  font-weight: 500;
+  background: #f3f4f6;
+  color: #6b7280;
+  border: 1px solid #e5e7eb;
+  border-radius: 3px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
+/* ─── Status Update ─── */
+.statusCurrent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.statusLabel { font-size: 12px; color: #9ca3af; font-weight: 500; }
+
+.statusSelect {
+  width: 100%;
+  font-size: 13px;
+  color: #1a1c21;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 8px 10px;
+  margin-bottom: 10px;
+  outline: none;
+  font-family: inherit;
+}
+
+.statusSelect:focus {
+  border-color: #3abec0;
+  box-shadow: 0 0 0 2px rgba(58, 190, 192, 0.12);
+}
+
+.updateBtn {
+  width: 100%;
+  background: #3abec0;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+}
+
+.updateBtn:hover:not(:disabled) { background: #32aaac; }
+
+.updateBtn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.savedMsg {
+  font-size: 12px;
+  color: #16a34a;
+  margin: 8px 0 0;
+  font-weight: 500;
+}
+
+/* ─── Properties list ─── */
+.propList { display: flex; flex-direction: column; gap: 0; }
+
+.propRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 13px;
+}
+
+.propRow:last-child { border-bottom: none; }
+
+.propKey { color: #9ca3af; font-weight: 500; white-space: nowrap; }
+
+.propVal {
+  color: #1a1c21;
+  text-align: right;
+  display: flex;
+  align-items: center;
+}
+
+/* ─── States ─── */
+.loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #9ca3af;
+  background: #f5f6f7;
+}
+
+.notFound {
+  padding: 48px 24px;
+  font-size: 14px;
+  color: #6b7280;
+  text-align: center;
+}
+
+.backBtn {
+  margin-top: 12px;
+  background: none;
+  color: #3abec0;
+  border: 1px solid #3abec0;
+  border-radius: 4px;
+  padding: 7px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+@media (max-width: 800px) {
+  .layout { grid-template-columns: 1fr; }
+  .content { padding: 12px; }
+  .titleBanner { flex-direction: column; }
+}

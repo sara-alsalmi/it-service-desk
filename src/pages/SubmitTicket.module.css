@@ -1,0 +1,320 @@
+/* ─── Shell ─── */
+.page {
+  min-height: 100vh;
+  background: #f5f6f7;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Standalone portal header ─── */
+.portalHeader {
+  height: 54px;
+  background: #252830;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  flex-shrink: 0;
+}
+
+.portalBrand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.portalMark {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background: #3abec0;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.portalText {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.portalName {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e2e5ec;
+  line-height: 1.2;
+}
+
+.portalSub {
+  font-size: 10.5px;
+  color: #5a6070;
+  letter-spacing: 0.2px;
+}
+
+/* ─── Content ─── */
+.content {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 32px 16px 48px;
+}
+
+/* ─── Form Card ─── */
+.form {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 620px;
+  overflow: hidden;
+}
+
+.formHeader {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid #f3f4f6;
+  background: #fafafa;
+}
+
+.formTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 4px;
+}
+
+.formSubtitle {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.section {
+  padding: 20px 24px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.section:last-of-type {
+  border-bottom: none;
+}
+
+.sectionTitle {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: #9ca3af;
+  margin: 0 0 14px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.input,
+.select,
+.textarea {
+  font-size: 13.5px;
+  color: #111827;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 8px 10px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  border-color: #3abec0;
+  box-shadow: 0 0 0 2px rgba(58, 190, 192, 0.12);
+}
+
+.inputError {
+  border-color: #dc2626;
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.error {
+  font-size: 12px;
+  color: #dc2626;
+}
+
+.submitError {
+  margin: 0 24px 12px;
+  font-size: 13px;
+  color: #dc2626;
+}
+
+.actions {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #f3f4f6;
+  background: #fafafa;
+}
+
+.submitBtn {
+  background: #3abec0;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 9px 22px;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #32aaac;
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ─── Success ─── */
+.successBox {
+  background: #fff;
+  border: 1px solid #e3e5ea;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 480px;
+  overflow: hidden;
+}
+
+.successHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 22px;
+  border-bottom: 1px solid #f0f1f3;
+  background: #fafbfc;
+}
+
+.successIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f0fafa;
+  color: #3abec0;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 2px solid #3abec0;
+}
+
+.successTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1c21;
+  margin: 0 0 3px;
+}
+
+.successText {
+  font-size: 12.5px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.successBody {
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.successMeta {
+  display: flex;
+  gap: 0;
+  border: 1px solid #e3e5ea;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.metaItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 16px;
+  background: #f9fafb;
+}
+
+.metaItem + .metaItem {
+  border-left: 1px solid #e3e5ea;
+}
+
+.metaLabel {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+
+.metaValue {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1c21;
+}
+
+.newBtn {
+  background: #fff;
+  color: #3abec0;
+  border: 1px solid #3abec0;
+  border-radius: 4px;
+  padding: 8px 18px;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.newBtn:hover {
+  background: #f0fafa;
+}
+
+@media (max-width: 600px) {
+  .row { grid-template-columns: 1fr; }
+  .content { padding: 16px; }
+  .portalHeader { padding: 0 16px; }
+  .portalTagline { display: none; }
+}
+
