@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import TopNav from '../components/TopNav';
 import { PriorityBadge, StatusBadge, PriorityDot } from '../components/Badge';
 import { getTicketById, updateTicketStatus } from '../services/supabaseService';
-import { STATUSES } from '../data/mockTickets';
+import { STATUSES } from '../data/constants';
 import styles from './TicketDetail.module.css';
 
 function formatDate(iso) {

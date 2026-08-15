@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { submitTicket } from '../services/ticketService';
-import { DEPARTMENTS } from '../data/mockTickets';
+import { DEPARTMENTS } from '../data/constants';
 import styles from './SubmitTicket.module.css';
 
 const emptyForm = {
