@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TopNav from '../components/TopNav';
 import { PriorityDot, StatusBadge } from '../components/Badge';
-import { getTickets, deleteTicket } from '../services/supabaseService';
+import { getTickets, deleteTicket, supabase } from '../services/supabaseService';
 import styles from './Tickets.module.css';
 
 function timeAgo(iso) {
@@ -114,6 +114,62 @@ export default function Tickets() {
         setTickets([]);
         setLoading(false);
       });
+  }, []);
+
+  useEffect(() => {
+    const channel = supabase
+      .channel('tickets-realtime')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'tickets' },
+        (payload) => {
+          const mapTicket = (row) => ({
+            id: row.ticket_id,
+            employeeName: row.employee_name,
+            employeeEmail: row.employee_email,
+            department: row.department,
+            issueDescription: row.issue_description,
+            category: row.category,
+            impact: row.impact,
+            urgency: row.urgency,
+            priority: row.priority,
+            assignedTeam: row.assigned_team,
+            status: row.status,
+            submittedAt: row.submitted_at,
+            isEscalated: row.is_escalated,
+            escalatedAt: row.escalated_at,
+          });
+
+          if (payload.eventType === 'INSERT') {
+            const newTicket = mapTicket(payload.new);
+            setTickets((prev) =>
+              prev.some((ticket) => ticket.id === newTicket.id)
+                ? prev
+                : [newTicket, ...prev]
+            );
+          }
+
+          if (payload.eventType === 'UPDATE') {
+            const updatedTicket = mapTicket(payload.new);
+            setTickets((prev) =>
+              prev.map((ticket) =>
+                ticket.id === updatedTicket.id ? updatedTicket : ticket
+              )
+            );
+          }
+
+          if (payload.eventType === 'DELETE') {
+            setTickets((prev) =>
+              prev.filter((ticket) => ticket.id !== payload.old.ticket_id)
+            );
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   const filtered = tickets
