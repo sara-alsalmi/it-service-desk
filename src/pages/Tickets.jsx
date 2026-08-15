@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TopNav from '../components/TopNav';
 import { PriorityDot, StatusBadge } from '../components/Badge';
-import { getTickets } from '../services/supabaseService';
+import { getTickets, deleteTicket } from '../services/supabaseService';
 import styles from './Tickets.module.css';
 
 function timeAgo(iso) {
@@ -93,6 +93,9 @@ export default function Tickets() {
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const [ticketToDelete, setTicketToDelete] = useState(null);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState('');
 
   const [filterPriority, setFilterPriority] = useState('');
   const [filterStatus, setFilterStatus] = useState('');
@@ -157,6 +160,28 @@ export default function Tickets() {
 
       return new Date(b.submittedAt) - new Date(a.submittedAt);
     });
+
+  async function confirmDelete() {
+    if (!ticketToDelete || deleting) return;
+
+    try {
+      setDeleting(true);
+      setDeleteError('');
+
+      await deleteTicket(ticketToDelete.id);
+
+      setTickets((prev) =>
+        prev.filter((ticket) => ticket.id !== ticketToDelete.id)
+      );
+
+      setTicketToDelete(null);
+    } catch (error) {
+      console.error('Delete failed:', error);
+      setDeleteError('Could not delete this ticket. Please try again.');
+    } finally {
+      setDeleting(false);
+    }
+  }
 
   function resetFilters() {
     setFilterPriority('');
@@ -298,9 +323,8 @@ export default function Tickets() {
                             className={`${styles.iconAction} ${styles.deleteIcon}`}
                             onClick={(e) => {
                               e.stopPropagation();
-                              alert(
-                                'Delete will be connected to Supabase next.'
-                              );
+                              setDeleteError('');
+                              setTicketToDelete(ticket);
                             }}
                             title="Delete ticket"
                             aria-label="Delete ticket"
@@ -443,6 +467,74 @@ export default function Tickets() {
           </aside>
         </div>
       </div>
+
+      {ticketToDelete && (
+        <div
+          className={styles.modalOverlay}
+          onMouseDown={(e) => {
+            if (e.target === e.currentTarget && !deleting) {
+              setTicketToDelete(null);
+              setDeleteError('');
+            }
+          }}
+        >
+          <div
+            className={styles.deleteModal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="delete-ticket-title"
+          >
+            <div className={styles.modalIconWrap} aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+                <path d="M6.5 7.5h11" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
+                <path d="M9 7.5V5.7h6v1.8" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M7.7 8.2l.8 10.1h7l.8-10.1" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M10.4 10.4v5.5M13.6 10.4v5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </div>
+
+            <h2 id="delete-ticket-title" className={styles.modalTitle}>
+              Delete ticket?
+            </h2>
+
+            <p className={styles.modalText}>
+              You’re about to permanently delete
+              <span className={styles.modalTicketId}> {ticketToDelete.id}</span>.
+              This action cannot be undone.
+            </p>
+
+            {deleteError && (
+              <div className={styles.modalError}>{deleteError}</div>
+            )}
+
+            <div className={styles.modalActions}>
+              <button
+                type="button"
+                className={styles.modalCancel}
+                onClick={() => {
+                  if (!deleting) {
+                    setTicketToDelete(null);
+                    setDeleteError('');
+                  }
+                }}
+                disabled={deleting}
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                className={styles.modalDelete}
+                onClick={confirmDelete}
+                disabled={deleting}
+              >
+                {deleting ? 'Deleting…' : 'Delete ticket'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
