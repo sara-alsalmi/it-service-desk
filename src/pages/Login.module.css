@@ -1,0 +1,146 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #f5f6f7;
+}
+
+.card {
+  width: min(390px, 100%);
+  background: #ffffff;
+  border: 1px solid #e3e5ea;
+  border-radius: 8px;
+  padding: 28px;
+  box-shadow: 0 12px 34px rgba(22, 27, 34, 0.08);
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #3abec0;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.9px;
+}
+
+.title {
+  margin: 0;
+  color: #1a1c21;
+  font-size: 23px;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  color: #8a8f9c;
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.label {
+  color: #4d5560;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.input {
+  width: 100%;
+  height: 40px;
+  padding: 0 11px;
+  border: 1px solid #d8dde3;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #252a31;
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: #b0b5bd;
+}
+
+.input:hover:not(:disabled) {
+  border-color: #bcc7cc;
+}
+
+.input:focus {
+  border-color: #3abec0;
+  box-shadow: 0 0 0 3px rgba(58, 190, 192, 0.11);
+}
+
+.input:disabled {
+  background: #f6f7f8;
+  cursor: not-allowed;
+}
+
+.errorMessage {
+  border: 1px solid #f1c9c5;
+  border-radius: 5px;
+  padding: 9px 10px;
+  background: #fff6f5;
+  color: #a93630;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.submitButton {
+  width: 100%;
+  height: 40px;
+  margin-top: 2px;
+  border: 1px solid #3abec0;
+  border-radius: 5px;
+  background: #3abec0;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #32aaac;
+  border-color: #32aaac;
+}
+
+.submitButton:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 520px) {
+  .page {
+    padding: 16px;
+  }
+
+  .card {
+    padding: 22px 18px;
+    border-radius: 6px;
+  }
+}

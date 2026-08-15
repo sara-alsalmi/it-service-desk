@@ -1,10 +1,13 @@
 ﻿import { useEffect, useRef, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+
 import {
   getAlerts,
   markAlertAsRead,
+  signOutAdmin,
   supabase,
 } from '../services/supabaseService';
+
 import styles from './TopNav.module.css';
 
 function timeAgo(iso) {
@@ -21,11 +24,15 @@ function timeAgo(iso) {
 
 export default function TopNav({ search, onSearchChange }) {
   const navigate = useNavigate();
+
   const dropdownRef = useRef(null);
+  const userMenuRef = useRef(null);
 
   const [alerts, setAlerts] = useState([]);
   const [alertsOpen, setAlertsOpen] = useState(false);
   const [alertsLoading, setAlertsLoading] = useState(true);
+
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   useEffect(() => {
     async function loadAlerts() {
@@ -81,11 +88,21 @@ export default function TopNav({ search, onSearchChange }) {
       ) {
         setAlertsOpen(false);
       }
+
+      if (
+        userMenuOpen &&
+        userMenuRef.current &&
+        !userMenuRef.current.contains(event.target)
+      ) {
+        setUserMenuOpen(false);
+      }
     }
 
     document.addEventListener('mousedown', handleOutsideClick);
-    return () => document.removeEventListener('mousedown', handleOutsideClick);
-  }, [alertsOpen]);
+
+    return () =>
+      document.removeEventListener('mousedown', handleOutsideClick);
+  }, [alertsOpen, userMenuOpen]);
 
   const unreadCount = alerts.filter((alert) => !alert.isRead).length;
   const unreadAlerts = alerts.filter((alert) => !alert.isRead);
@@ -107,6 +124,15 @@ export default function TopNav({ search, onSearchChange }) {
     navigate(`/ticket/${alert.ticketId}`);
   }
 
+  async function handleLogout() {
+    try {
+      await signOutAdmin();
+      navigate('/login', { replace: true });
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  }
+
   return (
     <header className={styles.nav}>
       <div className={styles.left}>
@@ -116,17 +142,22 @@ export default function TopNav({ search, onSearchChange }) {
 
         <nav className={styles.links}>
           <NavLink
-            to="/tickets"
+            to="/ticket-queue"
             className={({ isActive }) =>
               `${styles.link} ${isActive ? styles.active : ''}`
             }
           >
-            <svg className={styles.linkIcon} viewBox="0 0 16 16" fill="none">
+            <svg
+              className={styles.linkIcon}
+              viewBox="0 0 16 16"
+              fill="none"
+            >
               <path
                 d="M3 2h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z"
                 stroke="currentColor"
                 strokeWidth="1.3"
               />
+
               <path
                 d="M5 6h6M5 9h4"
                 stroke="currentColor"
@@ -134,6 +165,7 @@ export default function TopNav({ search, onSearchChange }) {
                 strokeLinecap="round"
               />
             </svg>
+
             TICKETS
           </NavLink>
         </nav>
@@ -141,7 +173,11 @@ export default function TopNav({ search, onSearchChange }) {
 
       <div className={styles.center}>
         <div className={styles.searchWrap}>
-          <svg className={styles.searchIcon} viewBox="0 0 16 16" fill="none">
+          <svg
+            className={styles.searchIcon}
+            viewBox="0 0 16 16"
+            fill="none"
+          >
             <circle
               cx="6.5"
               cy="6.5"
@@ -149,6 +185,7 @@ export default function TopNav({ search, onSearchChange }) {
               stroke="currentColor"
               strokeWidth="1.4"
             />
+
             <path
               d="M10.5 10.5L14 14"
               stroke="currentColor"
@@ -168,7 +205,10 @@ export default function TopNav({ search, onSearchChange }) {
       </div>
 
       <div className={styles.right}>
-        <div className={styles.notifications} ref={dropdownRef}>
+        <div
+          className={styles.notifications}
+          ref={dropdownRef}
+        >
           <button
             className={`${styles.iconBtn} ${
               alertsOpen ? styles.iconBtnActive : ''
@@ -176,15 +216,29 @@ export default function TopNav({ search, onSearchChange }) {
             title="Notifications"
             aria-label="Notifications"
             aria-expanded={alertsOpen}
-            onClick={() => setAlertsOpen((prev) => !prev)}
+            onClick={() => {
+              setAlertsOpen((prev) => !prev);
+              setUserMenuOpen(false);
+            }}
           >
-            <svg viewBox="0 0 16 16" fill="none" width="15" height="15">
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              width="15"
+              height="15"
+            >
               <path
                 d="M8 2a5 5 0 0 1 5 5v2.5l1 1.5H2l1-1.5V7a5 5 0 0 1 5-5Z"
                 stroke="currentColor"
                 strokeWidth="1.3"
               />
-              <circle cx="8" cy="14" r="1.2" fill="currentColor" />
+
+              <circle
+                cx="8"
+                cy="14"
+                r="1.2"
+                fill="currentColor"
+              />
             </svg>
 
             {unreadCount > 0 && (
@@ -198,7 +252,10 @@ export default function TopNav({ search, onSearchChange }) {
             <div className={styles.notificationMenu}>
               <div className={styles.notificationHeader}>
                 <div>
-                  <span className={styles.notificationTitle}>Notifications</span>
+                  <span className={styles.notificationTitle}>
+                    Notifications
+                  </span>
+
                   <span className={styles.notificationSubtitle}>
                     Critical incident alerts
                   </span>
@@ -213,7 +270,9 @@ export default function TopNav({ search, onSearchChange }) {
 
               <div className={styles.notificationList}>
                 {alertsLoading ? (
-                  <div className={styles.notificationEmpty}>Loading…</div>
+                  <div className={styles.notificationEmpty}>
+                    Loading…
+                  </div>
                 ) : unreadAlerts.length === 0 ? (
                   <div className={styles.notificationEmpty}>
                     No unread alerts
@@ -224,7 +283,9 @@ export default function TopNav({ search, onSearchChange }) {
                       key={alert.id}
                       type="button"
                       className={`${styles.notificationItem} ${
-                        !alert.isRead ? styles.notificationUnread : ''
+                        !alert.isRead
+                          ? styles.notificationUnread
+                          : ''
                       }`}
                       onClick={() => handleAlertClick(alert)}
                     >
@@ -259,17 +320,55 @@ export default function TopNav({ search, onSearchChange }) {
           )}
         </div>
 
-        <div className={styles.userMenu}>
-          <div className={styles.avatar}>AD</div>
-          <span className={styles.userName}>Admin</span>
-          <svg viewBox="0 0 10 6" width="9" height="9" fill="none">
-            <path
-              d="M1 1l4 4 4-4"
-              stroke="currentColor"
-              strokeWidth="1.4"
-              strokeLinecap="round"
-            />
-          </svg>
+        <div
+          className={styles.userDropdown}
+          ref={userMenuRef}
+        >
+          <button
+            type="button"
+            className={styles.userMenu}
+            onClick={() => {
+              setUserMenuOpen((prev) => !prev);
+              setAlertsOpen(false);
+            }}
+          >
+            <div className={styles.avatar}>AD</div>
+
+            <span className={styles.userName}>
+              Admin
+            </span>
+
+            <svg
+              viewBox="0 0 10 6"
+              width="9"
+              height="9"
+              fill="none"
+              className={
+                userMenuOpen
+                  ? styles.userChevronOpen
+                  : ''
+              }
+            >
+              <path
+                d="M1 1l4 4 4-4"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+
+          {userMenuOpen && (
+            <div className={styles.userDropdownMenu}>
+              <button
+                type="button"
+                className={styles.logoutButton}
+                onClick={handleLogout}
+              >
+                Log out
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </header>
