@@ -15,14 +15,14 @@ export default function Sidebar() {
       <nav className={styles.nav}>
         <p className={styles.navGroup}>WORKSPACE</p>
 
-        <NavLink to="/" end className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}>
+        <NavLink to="/ticket-queue" className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}>
           <svg className={styles.navIcon} viewBox="0 0 16 16" fill="none">
             <rect x="1" y="1" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.3"/>
             <rect x="9" y="1" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.3"/>
             <rect x="1" y="9" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.3"/>
             <rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" strokeWidth="1.3"/>
           </svg>
-          Dashboard
+          Ticket Queue
         </NavLink>
 
         <NavLink to="/submit" className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}>

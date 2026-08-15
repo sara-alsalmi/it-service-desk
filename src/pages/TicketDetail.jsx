@@ -51,7 +51,7 @@ export default function TicketDetail() {
         <TopNav search="" onSearchChange={() => {}} />
         <div className={styles.notFound}>
           <p>Ticket <strong>{id}</strong> does not exist.</p>
-          <button className={styles.backBtn} onClick={() => navigate('/')}>← Back to Dashboard</button>
+          <button className={styles.backBtn} onClick={() => navigate('/ticket-queue')}>← Back to Ticket Queue</button>
         </div>
       </div>
     );
@@ -62,7 +62,7 @@ export default function TicketDetail() {
       <div className={styles.content}>
         {/* Breadcrumb */}
         <div className={styles.breadcrumb}>
-          <button className={styles.breadBtn} onClick={() => navigate('/')}>Tickets</button>
+          <button className={styles.breadBtn} onClick={() => navigate('/ticket-queue')}>Ticket Queue</button>
           <span className={styles.sep}>/</span>
           <span className={styles.breadCurrent}>{ticket.id}</span>
         </div>
