@@ -2,6 +2,9 @@
 
 A realistic internal IT support workflow that combines a React frontend, n8n automation, Gemini AI triage, and Supabase for storage and realtime updates. Employees submit IT issues through a public form; an automated backend pipeline classifies, prioritises, routes, and stores each ticket — with critical incidents triggering an escalation flow and live admin notifications.
 
+> **Note:** This project is currently configured for local development and demonstration. The React frontend and n8n automation run locally, while Supabase provides the hosted database, authentication, and realtime services. The project focuses on demonstrating the system architecture, automation workflow, AI-assisted triage, and end-to-end ticket management logic.
+
+
 ---
 
 ## How It Works
